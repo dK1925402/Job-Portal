@@ -90,7 +90,7 @@ setbtn(!btn)
                         ) : (
                             <Popover>
                                 <PopoverTrigger asChild>
-                                    <Avatar className="cursor-pointer">
+                                     <Avatar className="cursor-pointer border-gray-700 border-1">
                                         <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn" />
                                     </Avatar>
                                 </PopoverTrigger>
