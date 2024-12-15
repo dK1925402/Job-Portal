@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
-
-import { Button } from './ui/button'
-import { Search } from 'lucide-react'
 import { useDispatch } from 'react-redux';
 import { setSearchedQuery } from '@/redux/jobSlice';
 import { useNavigate } from 'react-router-dom';
+import { useIsMobile } from "./Responsive";
 
 const categories = [
-    { name: "Frontend Developer", description: "Design and build stunning interfaces." },
-    { name: "Backend Developer", description: "Build scalable backend systems." },
-    { name: "Data Science", description: "Welcome to the world of data!" },
-    { name: "Graphic Designer", description: "Creativity at its best!" },
-    { name: "FullStack Developer", description: "Master of both frontend and backend!" },
-    { name: "Mobile Developer", description: "Develop apps for iOS and Android." },
+    { name: "Frontend Developer", description: "Design and build interfaces using HTML, CSS, and JavaScript for user engagement" },
+    { name: "Backend Developer", description: "Create scalable backend systems, manage databases, and integrate APIs for web applications" },
+    { name: "Data Science", description: "Analyze large datasets using Python and R to extract actionable business insights." },
+    { name: "Graphic Designer", description: "Design visually appealing graphics for digital and print media using design tools" },
+    { name: "FullStack Developer", description: "Master both frontend and backend technologies to build complete web applications and services." },
+    { name: "Mobile Developer", description: "Develop responsive and functional apps for iOS and Android with optimal performance." },
     { name: "UI/UX Designer", description: "Create seamless user experiences and intuitive interfaces." },
     { name: "DevOps Engineer", description: "Automate and streamline software development and operations." },
     { name: "Cybersecurity Specialist", description: "Protect networks, systems, and data from cyber threats." },
@@ -25,9 +23,14 @@ const categories = [
 ];
 
 const CategoryCarousel = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
+    // State to track screen size
+   const isMobile = useIsMobile();
+
+    // Height class based on screen size
+    const heightClass = isMobile ? "h-48" : "h-44";
 
     const searchJobHandler = (query) => {
         dispatch(setSearchedQuery(query));
@@ -59,18 +62,17 @@ const CategoryCarousel = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-6">
+        <div className="max-w-7xl mx-auto p-6 mt-2 ">
             <h3 className="text-2xl font-bold text-gray-700 mt-2 ">Browse by Categories</h3>
-            <div className="relative w-full h-40 flex items-center justify-center overflow-hidden">
-                <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+            <div className={`relative w-full ${heightClass} flex items-center justify-center overflow-hidden mt-4`}>
+                <div className="relative w-full max-w-8xl h-full flex items-center justify-center">
                     {categories.map((category, index) => {
                         const isActive = (index - activeIndex + categories.length) % categories.length === 0;
                         return (
                             <div
-
-                              onClick={() => searchJobHandler(category.name.split(' ')[0])}
+                                onClick={() => searchJobHandler(category.name.split(' ')[0])}
                                 key={index}
-                                className={`absolute transition-all duration-500 ease-in-out ${getSlideClass(index)} w-1/4 text-center`}
+                                className={`absolute transition-all duration-500 ease-in-out ${getSlideClass(index)} w-1/2 sm:w-1/3 md:w-1/4 text-center`}
                             >
                                 <div className="p-4 bg-white rounded-lg shadow-md cursor-pointer hover:scale-105">
                                     <h3
@@ -78,7 +80,9 @@ const CategoryCarousel = () => {
                                     >
                                         {category.name}
                                     </h3>
-                                    <p       className={`${isActive ? 'text-black mt-2' : 'text-gray-600 mt-2'}`} >{category.description}</p>
+                                    <p className={`${isActive ? 'text-black mt-2' : 'text-gray-600 mt-2'}`} >
+                                        {isMobile ? `${category.description.substring(0, 40)}...` : category.description}
+                                    </p>
                                 </div>
                             </div>
                         );
