@@ -2,11 +2,15 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import Event from './Event';
 import Navbar from './shared/Navbar';
+import { useIsMobile } from './Responsive';
  
 
 const Events = () => {
 
   const {allEvents} = useSelector(store=>store.event);
+  const isMobile = useIsMobile();
+  const grid = isMobile ? "grid-cols-1 " : " grid-cols-3";
+  // const grid = isMobile ? "grid-cols-1 : " grid-cols-3 ";
   // console.log(allEvents);
   console.log(allEvents?.length);
   if(allEvents?.length == 0){
@@ -31,8 +35,8 @@ const Events = () => {
 
       <div className='flex-1 h-[88vh] overflow-y-auto pb-5'>
 
-      <h3 className="text-2xl font-bold text-gray-700 mt-2 ">Latest Events </h3>
-      <div  className='grid grid-cols-3 gap-4'>
+      <h3 className="text-2xl font-bold text-gray-700 mt-2 mx-2 ">Latest Events </h3>
+      <div  className={`grid ${grid} gap-4`}>
         {
           allEvents?.map((event )=> ( <Event key={event._id} event={event} ></Event>))
       
