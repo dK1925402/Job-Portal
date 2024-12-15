@@ -163,7 +163,7 @@ const Navbar = () => {
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <svg
-            className="w-8 h-8"
+            className="w-6 h-6"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -199,11 +199,11 @@ const Navbar = () => {
 
           <div>
           <button
-                    className="block md:hidden text-gray-600 focus:outline-none "
+                    className="block md:hidden text-gray-600 focus:outline-none mr-3"
                     onClick={() => setMenuOpen(!menuOpen)}
                   >
                     <svg
-                      className="w-6 h-6"
+                      className="w-8 h-8"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
