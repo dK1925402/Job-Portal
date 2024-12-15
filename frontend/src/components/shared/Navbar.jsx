@@ -71,25 +71,7 @@ const Navbar = () => {
         </h1> </Bounce> )}
 
         {/* Hamburger Menu Button */}
-        <button
-          className="block md:hidden text-gray-600 focus:outline-none ml-10 mr-1"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
-          </svg>
-        </button>
+       
 
         {/* Desktop Menu */}
         <ul className={`hidden md:flex space-x-6 text-gray-600 font-medium`}>
@@ -172,6 +154,32 @@ const Navbar = () => {
         )}
 
         {!user ? (
+
+          <div  className='flex justify-center items-center '>
+
+<div>
+<button
+          className="block md:hidden text-gray-600 focus:outline-none  "
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <svg
+            className="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16m-7 6h7"
+            />
+          </svg>
+        </button>
+        </div>
+
+
           <div className="flex items-center gap-2">
             <Link to="/login">
               <Button variant="outline" className="hover:text-teal-500">
@@ -184,7 +192,34 @@ const Navbar = () => {
               </Button>
             </Link>
           </div>
+          </div>
         ) : (
+
+          <div  className='flex justify-center items-center'>
+
+          <div>
+          <button
+                    className="block md:hidden text-gray-600 focus:outline-none "
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 6h16M4 12h16m-7 6h7"
+                      />
+                    </svg>
+                  </button>
+                  </div>
+
+
           <Popover>
             <PopoverTrigger asChild>
               <Avatar className="cursor-pointer border-orange-400 border-2">
@@ -230,9 +265,11 @@ const Navbar = () => {
               </div>
             </PopoverContent>
           </Popover>
+          </div>
         )}
       </nav>
     </div>
+    
   );
 };
 
