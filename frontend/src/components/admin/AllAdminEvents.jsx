@@ -46,7 +46,7 @@ const AllAdminEvents = () => {
     }, [allAdminEvents, searchEventByText]);
 
     return (
-        <div>
+        <div className=''>
             <Table>
                 <TableCaption className="text-teal-600">A list of your recent posted events</TableCaption>
                 <TableHeader>
