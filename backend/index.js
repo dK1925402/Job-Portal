@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 const corsOptions = {
-    origin:'https://job-portal-sgbm.onrender.com',
+    origin:'https://www.sarvagyanirakarcommunity.co.in',
     credentials:true
 }
 
