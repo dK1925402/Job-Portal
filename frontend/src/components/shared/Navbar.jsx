@@ -24,6 +24,7 @@ const Navbar = () => {
 
    const isMobile = useIsMobile();
     const textsize = isMobile ? "text-lg" : "text-2xl ";
+   const pad = isMobile ? "p-3" : "p-6 ";
 
 
  const location = useLocation();
@@ -49,10 +50,10 @@ const Navbar = () => {
 
   return (
     <Block1>
-    <div className="max-w-7xl mx-auto p-6">
+    <div className={`max-w-7xl mx-auto ${pad}`}>
      
     
-      <nav className="bg-white px-6 py-4 shadow-md rounded-md max-w-7xl mx-auto flex items-center justify-between">
+      <nav className={`bg-white ${pad} py-4 shadow-md rounded-md max-w-7xl mx-auto flex items-center justify-between`}>
       { !isMobile? ( <Bounce> <h1 className={` ${textsize} font-bold text-teal-600 `}>
           Sarvagya<span className="text-[#F83002]">Nirakar</span>
         </h1> </Bounce>)
