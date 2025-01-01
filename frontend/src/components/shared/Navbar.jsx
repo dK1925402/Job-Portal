@@ -14,6 +14,7 @@ import {bounce} from 'react-animations';
 import { useIsMobile } from '../Responsive';
 import { Block, Block1 } from '../ui/animation';
 import { Bounce } from '../ui/bounce';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
@@ -24,6 +25,10 @@ const Navbar = () => {
    const isMobile = useIsMobile();
     const textsize = isMobile ? "text-lg" : "text-2xl ";
 
+
+ const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
 
   const logoutHandler = async () => {
@@ -37,7 +42,7 @@ const Navbar = () => {
         toast.success(res.data.message);
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       toast.error(error.response?.data?.message || 'Error logging out');
     }
   };
@@ -60,79 +65,175 @@ const Navbar = () => {
        
 
         {/* Desktop Menu */}
-        <ul className={`hidden md:flex space-x-6 text-gray-600 font-medium`}>
-          {user && user.role === 'recruiter' ? (
-            <>
-              <li>
-                <Link to="/admin/companies" className="hover:text-teal-500">
-                  Companies
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin/jobs" className="hover:text-teal-500">
-                  Jobs
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin/event" className="hover:text-teal-500">
-                  Event
-                </Link>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link to="/" className="hover:text-teal-500">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/jobs" className="hover:text-teal-500">
-                  Jobs
-                </Link>
-              </li>
-              <li>
-                <Link to="/browse" className="hover:text-teal-500">
-                  Browse
-                </Link>
-              </li>
-              <li>
-                <Link to="/event" className="hover:text-teal-500">
-                  Event
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
+     <ul className="hidden md:flex space-x-6 text-gray-600 font-medium">
+              {user && user.role === 'recruiter' ? (
+                <>
+                  <li>
+                    <Link to="/admin/companies" className={`hover:text-teal-500 hover:font-bold  ${
+                        isActive('/admin/companies')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}>
+                      Companies
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/jobs" className={`hover:text-teal-500 hover:font-bold ${
+                        isActive('/admin/jobs')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}>
+                      Jobs
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/admin/event" className={`hover:text-teal-500 hover:font-bold ${
+                        isActive('/admin/event')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}>
+                      Event
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      to="/"
+                      className={`hover:text-teal-500 hover:font-bold ${
+                        isActive('/')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}
+                    >
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/jobs"
+                      className={`hover:text-teal-500 hover:font-bold ${
+                        isActive('/jobs')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}
+                    >
+                      Jobs
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/browse"
+                      className={`hover:text-teal-500 hover:font-bold ${
+                        isActive('/browse')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}
+                    >
+                      Browse
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/event"
+                      className={`hover:text-teal-500 hover:font-bold ${
+                        isActive('/event')
+                          ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                          : ''
+                      }`}
+                    >
+                      Event
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <ul className="absolute top-16 left-0 w-full bg-white shadow-lg rounded-md md:hidden text-gray-600 font-medium z-10">
+          <ul className="absolute top-24 left-0 w-full bg-white shadow-lg rounded-md md:hidden text-gray-600 font-medium z-10">
             {user && user.role === 'recruiter' ? (
               <>
                 <li className="px-4 py-2 border-b hover:text-teal-500">
-                  <Link to="/admin/companies">Companies</Link>
+                  <Link to="/admin/companies"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/admin/companies')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Companies</Link>
                 </li>
                 <li className="px-4 py-2 border-b hover:text-teal-500">
-                  <Link to="/admin/jobs">Jobs</Link>
+                  <Link to="/admin/jobs"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/admin/jobs')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Jobs</Link>
                 </li>
                 <li className="px-4 py-2 hover:text-teal-500">
-                  <Link to="/admin/event">Event</Link>
+                  <Link to="/admin/event"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/admin/event')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Event</Link>
                 </li>
               </>
             ) : (
               <>
                 <li className="px-4 py-2 border-b hover:text-teal-500">
-                  <Link to="/">Home</Link>
+                  <Link to="/"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Home</Link>
                 </li>
                 <li className="px-4 py-2 border-b hover:text-teal-500">
-                  <Link to="/jobs">Jobs</Link>
+                  <Link to="/jobs"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/jobs')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Jobs</Link>
                 </li>
                 <li className="px-4 py-2 border-b hover:text-teal-500">
-                  <Link to="/browse">Browse</Link>
+                  <Link to="/browse"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/browse')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Browse</Link>
                 </li>
                 <li className="px-4 py-2 hover:text-teal-500">
-                  <Link to="/event">Event</Link>
+                  <Link to="/event"
+                  
+                   className={`hover:text-teal-500 ${
+                    isActive('/event')
+                      ? 'text-orange-500 font-bold underline underline-offset-4 decoration-2'
+                      : ''
+                  }`}
+                  
+                  >Event</Link>
                 </li>
               </>
             )}
@@ -166,7 +267,7 @@ const Navbar = () => {
         </div>
 
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 ml-2" >
             <Link to="/login">
               <Button variant="outline" className="hover:text-teal-500">
                 Login
