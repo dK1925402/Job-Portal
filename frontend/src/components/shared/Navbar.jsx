@@ -24,7 +24,7 @@ const Navbar = () => {
 
    const isMobile = useIsMobile();
     const textsize = isMobile ? "text-lg" : "text-2xl ";
-   const pad = isMobile ? "p-3" : "p-6 ";
+   const pad = isMobile ? "p-4" : "p-6 ";
 
 
  const location = useLocation();
